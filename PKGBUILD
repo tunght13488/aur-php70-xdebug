@@ -9,7 +9,7 @@
 php_suffix="70" # This mutation
 php_ext="xdebug"
 pkgname="php${php_suffix}-${php_ext}"
-pkgver="2.5.5"
+pkgver="2.6.0"
 pkgrel=1
 
 
@@ -23,9 +23,8 @@ pkg_src="${php_ext}-${pkgver}"
 
 source=("https://www.xdebug.org/files/${pkg_src}.tgz"  'xdebug.ini')
 
-sha256sums=(
-  '72108bf2bc514ee7198e10466a0fedcac3df9bbc5bd26ce2ec2dafab990bf1a4'
-  '7c66883dc2ade69069ef84e30188b25630748aa9c8b0dd123727c00505421205')
+sha256sums=('b5264cc03bf68fcbb04b97229f96dca505d7b87ec2fb3bd4249896783d29cbdc'
+            '7c66883dc2ade69069ef84e30188b25630748aa9c8b0dd123727c00505421205')
 
 
 # locate php-config[suffix], get options
@@ -144,7 +143,7 @@ package() {
   make INSTALL_ROOT="$pkgdir" install
   install -D -m 644 "$srcdir"/xdebug.ini "$pkgdir/${PHPCONFIG_SCANDIR}/xdebug.ini"
 
-  install -D -m755 "./debugclient/debugclient" "${pkgdir}/usr/bin/debugclient70"
+  install -D -m755 "./debugclient/debugclient" "${pkgdir}/usr/bin/debugclient${php_suffix}"
 }
 # Run this  before the backup file variables get evaluated
 if [[ -z $PHPIZE_CMD ]]; then
